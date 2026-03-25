@@ -1,7 +1,16 @@
 name: Automated tests
 
 on:
-  push
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: Choose target
+        required: true
+        default:
+        type: choice
+        options:
+          - auth_test
+          - crud_test
 
 jobs:
   test:
@@ -9,13 +18,16 @@ jobs:
 
     steps:
       - name: checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
       - name: setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.14.3'
+          python-version: '3.12'
       - name: install dependencies
         run: pip install -r requirements.txt
-      - name: run tests
-        uses: pytest
-
+      - name: auth_tests
+        if: "github.event.inputs.depluyment_target == 'auth_test'"
+        run: pytest tests/test_CRUD.py::test_auth, tests/test_CRUD.py::test_auth_response
+      - name: crud_test
+        if: "github.event.inputs.depluyment_target == 'crud_test'"
+        run: pytest tests/test_CRUD.py::test_crud_booking
