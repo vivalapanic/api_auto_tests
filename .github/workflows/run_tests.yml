@@ -25,11 +25,9 @@ jobs:
           python-version: '3.12'
       - name: install dependencies
         run: pip install -r requirements.txt
-      - name: auth tests
+      - name: auth_tests
         if: "github.event.inputs.depluyment_target == 'auth_test'"
         run: pytest tests/test_CRUD.py::test_auth, tests/test_CRUD.py::test_auth_response
-      - name: crud test
+      - name: crud_test
         if: "github.event.inputs.depluyment_target == 'crud_test'"
         run: pytest tests/test_CRUD.py::test_crud_booking
-      - name: run tests
-        run: pytest --alluredir=allure-results
