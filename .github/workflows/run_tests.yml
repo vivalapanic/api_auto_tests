@@ -9,13 +9,15 @@ jobs:
 
     steps:
       - name: checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
       - name: setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.14.3'
+          python-version: '3.12'
       - name: install dependencies
         run: pip install -r requirements.txt
       - name: run tests
-        uses: pytest
+        run: pytest
+      - name: run tests
+        run: pytest --alluredir=allure-results
 
