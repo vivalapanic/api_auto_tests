@@ -27,7 +27,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: auth_tests
         if: "github.event.inputs.depluyment_target == 'auth_test'"
-        run: pytest tests/test_CRUD.py::test_auth, tests/test_CRUD.py::test_auth_response
+        run: pytest tests/test_CRUD.py::test_auth tests/test_CRUD.py::test_auth_response
       - name: crud_test
         if: "github.event.inputs.depluyment_target == 'crud_test'"
         run: pytest tests/test_CRUD.py::test_crud_booking
