@@ -9,7 +9,6 @@ on:
       deployment_target:
         description: Choose target
         required: true
-        default:
         type: choice
         options:
           - auth_test
