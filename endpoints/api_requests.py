@@ -15,6 +15,24 @@ def create_booking():
     with allure.step('Status code create'):
         return response
 
+def create_various_data(payload):
+    url = f"{auf_data.base_url}/booking"
+    response = requests.post(url, json=payload)
+    with allure.step('Status code create various data'):
+        return response
+
+def create_invalid_data(payload):
+    url = f"{auf_data.base_url}/booking"
+    response = requests.post(url, json=payload)
+    with allure.step('Status code create invalid date'):
+        return response
+
+def create_various_booking_data(payload):
+    url = f"{auf_data.base_url}/booking"
+    response = requests.post(url, json=payload)
+    with allure.step('Status code create various booking date'):
+        return response
+
 def update_booking(session,booking_id):
     url = f"{auf_data.base_url}/booking/{booking_id}"
     response = session.put(url, json=client_data.update_payload)
