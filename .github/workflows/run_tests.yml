@@ -28,26 +28,13 @@ jobs:
           python-version: '3.12'
       - name: install dependencies
         run: pip install -r requirements.txt
+
       - name: auth_tests
         if: "github.event.inputs.deployment_target == 'auth_test'"
         run: pytest tests/test_CRUD.py::test_auth tests/test_CRUD.py::test_auth_response
       - name: crud_test
         if: "github.event.inputs.deployment_target == 'crud_test'"
         run: pytest tests/test_CRUD.py::test_crud_booking
-      - name: varios_data_test
+      - name: varios_data_create
         if: "github.event.inputs.deployment_target == 'varios_data_create'"
-        run: pytest tests/teat_validation_create.py
-#      - name: Install Allure
-#        run: |
-#          sudo apt-get install -y default-jre
-#          wget https://github.com/allure-framework/allure2/releases/latest/download/allure-2.27.0.tgz
-#          tar -zxvf allure-2.27.0.tgz
-#          sudo mv allure-2.27.0 /opt/allure
-#          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
-#      - name: Generate Allure report
-#        run: allure generate allure-results -o allure-report --clean
-#      - name: Upload Allure report
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: allure-report
-#          path: allure-report
+        run: pytest tests/test_validation_create.py
